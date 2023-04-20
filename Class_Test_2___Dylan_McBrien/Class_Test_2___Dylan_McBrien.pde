@@ -4,12 +4,21 @@ void setup()
   size(1000, 1000);
   colorMode(HSB, 360, 100, 100);
   
+  flagStart();
 }
+
+//Flag Centre Point
+float[] flagX = new float[8]; 
+float[] flagY = new float[8];
 
 void flag (float flagX, float flagY, float stripeSize)
 {
   
-  float stripeY = flagY;
+  float flagDrawX = flagX - (stripeSize * 6);
+  float flagDrawY = flagY - (stripeSize / 3);
+
+  
+  float stripeY = flagDrawY;
   
   for(int i = 0 ; i < 6 ; i ++)
   {
@@ -17,13 +26,13 @@ void flag (float flagX, float flagY, float stripeSize)
     noStroke(); 
     fill(i * (360 / 6), 90, 95);    
     
-    rect(flagX, stripeY, stripeSize * 12, stripeSize);    
+    rect(flagDrawX, stripeY, stripeSize * 12, stripeSize);    
     stripeY += stripeSize;
     
   }
   
     
-  float triCentre = flagY + (stripeSize * 3);
+  float triCentre = flagDrawY + (stripeSize * 3);
 
   for(int i = 0 ; i < 4 ; i ++)
   {
@@ -47,10 +56,10 @@ void flag (float flagX, float flagY, float stripeSize)
       fill(60, 60, 95); 
     }
     
-    float triTop = flagY + (((stripeSize * 3) / 4) * i);
-    float triBottom = flagY + (((stripeSize * 3) / 4) * (8 - i));
+    float triTop = flagDrawY + (((stripeSize * 3) / 4) * i);
+    float triBottom = flagDrawY + (((stripeSize * 3) / 4) * (8 - i));
     
-    triangle(flagX, triTop, flagX, triBottom, flagX + (stripeSize * (6 - i)), triCentre);
+    triangle(flagDrawX, triTop, flagDrawX, triBottom, flagDrawX + (stripeSize * (6 - i)), triCentre);
     
   }  
   
@@ -64,11 +73,23 @@ void flag (float flagX, float flagY, float stripeSize)
   
   stroke(270, 70, 90);
   
-  circle (flagX + stripeSize, triCentre, stripeSize * 0.75);
+  circle (flagDrawX + stripeSize, triCentre, stripeSize * 0.75);
   
 }
 
+void flagStart()
+{
+  
+  for(int i = 0 ; i < 8 ; i ++)
+  {
+    
+    flagX[i] = random(0, width * 0.95);
+    flagY[i] = random(0, height * 0.95);
 
+    
+  }
+  
+}
 
 void draw()
 { 
@@ -78,7 +99,7 @@ void draw()
   for(int i = 0 ; i < 8 ; i ++)
   {
     
-    flag(random(0, width * 0.9), random(0, width * 0.9), random(5, 50));
+    flag(flagX[i], flagY[i], random(5, 50));
     
   }
   
