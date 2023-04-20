@@ -1,6 +1,6 @@
 void setup()
 {
-  frameRate(1);
+  frameRate(3);
   size(1000, 1000);
   colorMode(HSB, 360, 100, 100);
   
