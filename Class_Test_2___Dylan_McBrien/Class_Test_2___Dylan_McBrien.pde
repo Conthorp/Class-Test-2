@@ -1,6 +1,6 @@
 void setup()
 {
-  
+  frameRate(1);
   size(1000, 1000);
   colorMode(HSB, 360, 100, 100);
   
@@ -54,14 +54,32 @@ void flag (float flagX, float flagY, float stripeSize)
     
   }  
   
+  noFill();
+  strokeWeight(stripeSize / 5.0f);
+  
+  if (stripeSize <= 5)
+  {
+    strokeWeight(1);
+  }
+  
+  stroke(270, 70, 90);
+  
+  circle (flagX + stripeSize, triCentre, stripeSize * 0.75);
+  
 }
 
 
 
 void draw()
-{
+{ 
   
-  flag(100, 100, 50);
-
+  background(0);
+  
+  for(int i = 0 ; i < 8 ; i ++)
+  {
+    
+    flag(random(0, width * 0.9), random(0, width * 0.9), random(5, 50));
+    
+  }
   
 }
